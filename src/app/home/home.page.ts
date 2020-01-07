@@ -1,5 +1,6 @@
 import { Component,ViewChild } from '@angular/core';
 import { SignaturePad } from 'angular2-signaturepad/signature-pad';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,7 @@ export class HomePage {
     'canvasHeight': 300
   };
 
-  constructor() {}
+  constructor(public toast: ToastController) {}
 
   drawStart() {
   console.log("drawStart");
@@ -31,6 +32,13 @@ export class HomePage {
     this.signaturePad.clear();
   }
 
-  agrgarFirma() { console.log('aceptar firma'); }
+  async agrgarFirma() { 
+    console.log('aceptar firma');
+    const toast = await this.toast.create({
+      message: 'Firma Guardada',
+      duration: 2000
+    });
+    toast.present(); 
+  }
 
 }
